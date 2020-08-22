@@ -1,0 +1,23 @@
+#piechart {
+    height: 600px;
+}
+
+label {
+    display: inline-block;
+    width: 100px;
+}
+
+input {
+    border-radius: 3px;
+}
+input:invalid {
+    border: 1px solid red;
+}
+
+input:valid {
+    border: 1px solid black;
+}
+
+.item {
+    margin: 2px;
+}

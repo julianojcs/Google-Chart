@@ -1,109 +1,32 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="description" content="" />
+        <meta name="author" content="Juliano Costa Silva" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>Pie Chart - User Input</title>
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <!-- Applicantion CSS file -->
+        <link rel="stylesheet" type="text/css" href="style.css" />
+    </head>
+    <body>
+        <p>How many hours do you spend per week?</p>
+        <div class="">
+            <form id="form1">
+                <div class="item"><label for="workvar">Working: </label><input type="number" min="0" max="168" required id="workvar"></div>
+                <div class="item"><label for="eatvar">Eating: </label><input type="number" min="0" max="168" required id="eatvar"></div>
+                <div class="item"><label for="commutevar">Commuting: </label><input type="number" min="0" max="168" required id="commutevar"></div>
+                <div class="item"><label for="tvvar">Watching tv: </label><input type="number" min="0" max="168" required id="tvvar"></div>
+                <div class="item"><label for="sleepvar">Sleeping: </label><input type="number" min="0" max="168" required id="sleepvar"></div>
+                <div class="item"><label for="othervar">Other: </label><input type="number" min="0" max="168" required id="othervar"></div>
+                <button type="submit" value="Submit">Submit</button>
+            </form>
+        </div>
+        <div id="piechart"></div>
 
-<head>
-    <title>Pie Chart - User Input</title>
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <style>
-        #piechart {
-            height: 600px;
-        }
-
-        label {
-            display: inline-block;
-            width: 100px;
-        }
-
-        input {
-            border-radius: 3px;
-        }
-        input:invalid {
-            border: 1px solid red;
-        }
-
-        input:valid {
-            border: 1px solid black;
-        }
-
-        .item {
-            margin: 2px;
-        }
-    </style>
-</head>
-
-<body>
-    <p>How many hours do you spend per week?</p>
-    <div class="">
-        <form id="form1">
-            <div class="item"><label for="workvar">Working: </label><input type="number" min="0" max="168" required id="workvar"></div>
-            <div class="item"><label for="eatvar">Eating: </label><input type="number" min="0" max="168" required id="eatvar"></div>
-            <div class="item"><label for="commutevar">Commuting: </label><input type="number" min="0" max="168" required id="commutevar"></div>
-            <div class="item"><label for="tvvar">Watching tv: </label><input type="number" min="0" max="168" required id="tvvar"></div>
-            <div class="item"><label for="sleepvar">Sleeping: </label><input type="number" min="0" max="168" required id="sleepvar"></div>
-            <div class="item"><label for="othervar">Other: </label><input type="number" min="0" max="168" required id="othervar"></div>
-            <button type="submit" value="Submit">Submit</button>
-        </form>
-    </div>
-    <div id="piechart"></div>
-    <script>
-        inputs = document.getElementsByTagName("input");
-
-        //define the chart package
-        google.charts.load('current', {
-            'packages': ['corechart']
-        });
-        //set what is supposed to happen when the page loads. You typically want a state of the chart to show on load, but in this case, there is no data on load.
-        //google.charts.setOnLoadCallback(drawChart);
-
-        //submit requires text inputs to use parseInt to work as numbers
-        function drawChart() {
-            work = parseInt(document.getElementById('workvar').value);
-            eat = parseInt(document.getElementById('eatvar').value);
-            commute = parseInt(document.getElementById('commutevar').value);
-            tv = parseInt(document.getElementById('tvvar').value);
-            sleep = parseInt(document.getElementById('sleepvar').value);
-            other = parseInt(document.getElementById('othervar').value);
-
-            //replace data with variable names
-            var data = google.visualization.arrayToDataTable([
-                ['Task', 'Hours per Week'],
-                ['Work', work],
-                ['Eat', eat],
-                ['Commute', commute],
-                ['Watch TV', tv],
-                ['Sleep', sleep],
-                ['Other', other]
-            ]);
-            var options = {
-                title: 'Weekly Activities'
-            };
-            //the id is the DOM location to draw the chart    
-            var chart = new google.visualization.PieChart(document.getElementById('piechart'));
-            chart.draw(data, options);
-        }
-        
-        document.getElementById("form1").addEventListener("submit", (e) => {
-            // let sum = Array.from(inputs).forEach(function(element) {
-            //     sum +=  parseInt(element.value);
-            // });
-            
-            // let sum = Array.from(inputs).reduce(function(total, input) {
-            //     return total + parseInt(input.value);
-            // }, 0);
-
-            let sum = [...inputs].reduce(function(total, input) {
-                return total + parseInt(input.value);
-            }, 0);
-
-            if (sum>168) {
-                alert('You don\'t have more the 168h per week!');
-                e.preventDefault();
-            } else {
-                drawChart(); 
-            }
-            e.preventDefault();
-        });
-    </script>
-</body>
-
+        <!-- Applicantion JS file -->
+        <script type="text/javascript" src="app.js"></script>
+    </body>
 </html>
